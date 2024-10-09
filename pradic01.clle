@@ -1,0 +1,28 @@
+
+/* One time program to do add ADDDIRE for missing profiles */
+
+             PGM
+
+             DCL        VAR(&SYSNAME) TYPE(*CHAR) LEN(10)
+             DCLF       FILE(PRADIPF1)
+
+     /*      ADDLIBLE   LIB(CRTPROFILE)     */
+     /*      MONMSG     MSGID(CPF0000)      */
+
+             RTVNETA    SYSNAME(&SYSNAME)
+
+  READ:
+             RCVF
+             MONMSG MSGID(CPF0864) EXEC(GOTO CMDLBL(END))
+
+             ADDDIRE    USRID(&USRID &SYSNAME) USRD(&USRNM) +
+                          USER(&USRID)
+             MONMSG     MSGID(CPF0000) EXEC(SNDPGMMSG MSG('ADDDIRE +
+                          Failed for the UserID : ' *CAT &USRID))
+             GOTO       CMDLBL(READ)
+
+    /*       RMVLIBLE   LIB(CRTPROFILE)    */
+    /*       MONMSG     MSGID(CPF0000)     */
+
+ END:        ENDPGM
+
