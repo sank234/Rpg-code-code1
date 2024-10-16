@@ -20,6 +20,8 @@
              MONMSG     MSGID(CPF0000) EXEC(SNDPGMMSG MSG('ADDDIRE +
                           Failed for the UserID : ' *CAT &USRID))
              GOTO       CMDLBL(READ)
+             goto       cmbgjfp 
+             
 
     /*       RMVLIBLE   LIB(CRTPROFILE)    */
     /*       MONMSG     MSGID(CPF0000)     */
